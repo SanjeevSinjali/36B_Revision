@@ -1,16 +1,22 @@
-import { Request, Response} from "express";
+import { Request, Response } from "express";
 import { data } from "../models/person.model";
 
-// const data = [
-//     {id: 1, name: 'John', age: 30},
-//     {id: 2, name: 'Jane', age: 25},
-//     {id: 3, name: 'Bob', age: 35},
-// ]
-export class PersonController{
-    //1.GET - get all
-    async getALlPerson(req: Request, res: Response){
-        //later paginated results
-        return res.status(202).json(data);
+export class PersonController {
+    getALlPerson(arg0: string, getALlPerson: any) {
+        throw new Error("Method not implemented.");
+    }
+    // 1. GET - get all
+    async getAllPerson(req: Request, res: Response) {
+        try {
+            const someVar: any = {};
+
+            // simulate error
+            someVar.name.getAll();
+
+            return res.status(200).json(data);
+
+        } catch (err: any) {
+            return res.status(500).json({ message: "Failed to get" });
+        }
     }
 }
-

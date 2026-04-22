@@ -1,9 +1,15 @@
-import express, {Application, Request, Response} from 'express';
+import express, {Application, NextFunction, Request, Response} from 'express';
+
+// import { router } from './routes/person.route';
+
+import personRoute from './routes/person.route';
 
 const app: Application = express();
 
 app.use(express.json());//use json as request
 app.use(express.urlencoded({ extended: true}));//use form-urlencoded as request
+
+app.use("/api/persons", personRoute);
 
 type Person = {
     id: number;
@@ -106,8 +112,17 @@ app.get(
     }
 );
 
+// localhost:8088/hello/John/21?title=Dr.&category=doctor
+//global handler if no route match, return 404
+
+app.use(
+    (req: Request, res: Response) => {
+        return res.status(404).json({message: "Route not found"});
+    }
+)
+
 const PORT: number = 8088;
-const dummy = "test";
+const dummy = "Dummy";
 
 export{
     PORT,
@@ -115,6 +130,15 @@ export{
 }
 
 export default app;
+
+//global errror handler
+app.use(
+    (err: Error, req: Request, res: Response, next: NextFunction) => {
+        return res.status(500).json(
+            {message: err.message ?? "Internal Server Error"}
+        );
+    }
+)
 
 // app.listen(
 //     PORT,
