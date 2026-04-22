@@ -4,7 +4,7 @@
   "type": "module",
   "main": "day1.js",
   "scripts": {
-    "dev": "npx tsx --watch app.ts product.ts",
+    "dev": "npx tsx --watch product.ts",
     "start": "node day1.js",
     "start-day2": "node day2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@types/express": "^5.0.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1"
   }
 }

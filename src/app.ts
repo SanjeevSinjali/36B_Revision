@@ -107,12 +107,20 @@ app.get(
 );
 
 const PORT: number = 8088;
+const dummy = "test";
 
-app.listen(
+export{
     PORT,
-    () => {
-        console.log(`Server running: ${PORT}`);
-    }
-);
+    dummy
+}
+
+export default app;
+
+// app.listen(
+//     PORT,
+//     () => {
+//         console.log(`Server running: ${PORT}`);
+//     }
+// );
 //execute script: npx tsx --watch app.ts
 //http://localhost:8088
