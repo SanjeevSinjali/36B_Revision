@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { data } from "../models/person.model";
 import { HttpException } from "../exception/http-exception";
+import { ApiResponseHelper } from "../utils/api-response";
 
 
 export class PersonController {
@@ -17,9 +18,15 @@ export class PersonController {
             }
             // simulate error
             someVar.name.getAll();
-            return res.status(200).json(data);
-        } catch (err: Error | unknown) {
-            return res.status(500).json({ message: "Failed to get" });
+            //return res.status(200).json(data);
+            return ApiResponseHelper.success(res,data); //consistent api response
+        } catch (err: Error | unknown | any) {
+            // return res.status(500).json({ message: "Failed to get" });
+            return ApiResponseHelper.error(
+                res,
+                err?.message || "Failed to get",
+                err.status || 500
+            );
         }
     }
 }
