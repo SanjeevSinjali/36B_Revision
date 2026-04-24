@@ -3,6 +3,8 @@ import express, {Application, NextFunction, Request, Response} from 'express';
 // import { router } from './routes/person.route';
 
 import personRoute from './routes/person.route';
+import { HttpException } from './exception/http-exception';
+import { ApiResponseHelper } from './utils/api-response';
 
 const app: Application = express();
 
@@ -97,7 +99,7 @@ app.get(
         //const name = req.params.name;
         const {name} = req.params; //:name
         const {title} = req.query; //?title=Dr.
-        return res.send('Hello, ${title} ${name}!');
+        return res.send(`Hello, ${title} ${name}!`);
     }
 );
 
@@ -134,9 +136,21 @@ export default app;
 //global errror handler
 app.use(
     (err: Error, req: Request, res: Response, next: NextFunction) => {
-        return res.status(500).json(
-            {message: err.message ?? "Internal Server Error"}
+        if(err instanceof HttpException){
+            return ApiResponseHelper.error (
+                res, 
+                err.message,
+                err.status
+            );
+        }
+        return ApiResponseHelper.error(
+            res,
+            err?.message || "Internal Server Error",
+            500
         );
+        // return res.status(500).json(
+        //     {message: err.message ?? "Internal Server Error"}
+        // );
     }
 )
 
