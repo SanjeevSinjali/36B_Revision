@@ -162,3 +162,14 @@ app.use(
 // );
 //execute script: npx tsx --watch app.ts
 //http://localhost:8088
+
+
+// create a function updatePerson
+    // 1. find person by id, if not found 
+    // throw 404 with message "Person not found"
+    // 2. if name or age is not provided in request body,
+    // default to existing person's name and age
+    // 3. update the person's name and age with request body
+    // 4. return the updated person with consistent api response
+    // 5. implement in router -> /api/persons/:id [PUT]
+
