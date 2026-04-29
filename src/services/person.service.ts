@@ -18,4 +18,18 @@ export class PersonService {
 
         return person;
     }
+
+    createPerson(CreatePersonDTO: CreatePersonDTO){
+        //business logic
+        if(CreatePersonDTO.age < 18){
+            throw new HttpException(400, "Age must be at least 18");
+        }
+        const newPerson = personRepo.create({
+            id: Date.now(), // example id generation
+            ...CreatePersonDTO
+        });
+        newPerson.age = Number(newPerson.age); //example transformation
+
+        return newPerson;
+    }
 }
