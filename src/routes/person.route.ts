@@ -8,7 +8,7 @@ const data = Router();
 //same as app.get()
 router.get(
     "/",
-    personController.getALlPerson
+    personController.getAllPerson
 )
 
 router.post(
